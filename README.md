@@ -7,8 +7,11 @@ Technology:
 
 Cordova
 Angularjs
-Ionicframwork
-Socket.io
-SMS Plugin
-Email Composer
 
+Ionicframwork
+
+Socket.io
+
+SMS Plugin
+
+Email Composer
