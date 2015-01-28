@@ -1,0 +1,13 @@
+<ion-view title="Live Messaging">
+    <ion-content has-header="true" padding="false">
+        <div class="list">
+            <a ng-repeat="friend in friends | orderBy:'-time'"  class="item item-avatar"  href="#/{{user}}/friends/{{friend.id}}/{{friend.name}}">
+                <img src="https://d2lrssvd8no86h.cloudfront.net/{{friend.id}}.jpg">
+                <h3>{{friend.name}}<span class="rightTime">{{friend.time | date:'shortTime'}}</span></h3>
+                <p ng-hide="from === friend.id && (liveIn != '' || newMessage !='') ">{{friend.lastMessage}}&nbsp;</p>
+                <p ng-show="from === friend.id && liveIn != '' ">{{liveIn}}&nbsp;<i class="icon ion-loading-c"></i></p>
+                <p class="bolder" ng-show="from === friend.id && newMessage !='' ">{{newMessage}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

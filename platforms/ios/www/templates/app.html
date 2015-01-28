@@ -1,0 +1,111 @@
+<nav-page id="app-page">
+  <tabs tabs-style="tabs-positive" tabs-type="tabs-icon-only" animate-nav="true">
+    
+    <!-- Messages tab -->
+    <tab title="Messages" icon="icon ion-chatbubble-working" ng-controller="FriendsTabCtrl">
+      <content has-header="true" has-tabs="true" >
+      <view title="'Messages'">
+        <div class="list">
+          <a ng-repeat="friend in friends" class="item item-avatar" href="#/{{user}}/friends/{{friend.id}}">
+              <img src="img/ionic.png">
+              <h3>{{friend.name}}</h3>
+          </a>
+        </div>
+        </view>
+      </content>
+    </tab>
+
+    <!-- People tab -->
+    <tab title="People" icon="icon ion-ios7-people" ng-controller="AppCtrl">
+      <content has-header="true" has-tabs="true">
+      <view title="'Users'">
+        <div class="bar bar-header item-input-inset">
+          <label class="item-input-wrapper">
+            <i class="icon ion-ios7-search placeholder-icon"></i>
+            <input type="search" placeholder="Search Users">
+          </label>
+          <button class="button button-clear searchButton">Cancel</button>
+        </div>
+        <div class="list">
+          <a ng-repeat="person in people" class="item item-avatar" href="#/{{user}}/friends/{{person._id}}" ng-click="friendRequest('{{person._id}}');">
+            <img src="img/ionic.png">
+            <h2>{{person.username}}</h2>
+            <p>{{person.headline}}</p>
+          </a>
+        </div>
+        </view>
+      </content>
+    </tab>
+
+     <!-- Account tab -->
+    <tab title="Account" icon="icon ion-gear-a" ng-controller="API" >
+      <content has-header="true" has-tabs="true" >
+      <view title="'Login'">
+        <div ng-show="signupErr"><h4 class="center" style="color:red;">Please Try Again</h4></div>
+          
+          <div class="list card" ng-show="loggedIn">
+            <button class="button button-positive button-block" ng-click='shareTextter()'>Share Textter</button>
+            <div class="item item-avatar">
+              <img src="img/ionic.png">
+              <h2>{{currentUser}}</h2>
+              <p>Likes surfing, biking, swimming</p>
+            </div>
+            <div class="item item-image">
+            <img src="img/ionic.png">
+            </div>
+            <a class="item item-icon-left calm" href="#">
+                <i class="icon ion-log-out"></i>Logout
+            </a>
+          </div>  
+
+          <div class="list list-inset" ng-show="oldAccount"> 
+            <form>
+                <label class="item item-input">
+                    <span class="input-label">Username</span>
+                    <input type="text" ng-model="oldUser.username">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Password</span>
+                    <input type="password" ng-model="oldUser.password">
+                </label>
+                <button  ng-click="loginUser(oldUser)" class="button button-positive button-block">Sign In</button>
+            </form>
+            <button ng-controller="AppCtrl" class="button button-positive button-block" ng-click='shareTextter()'>Share Textter</button>
+        <p  class="center linked" ng-click="showSignup()">Don't Have an account?</p>
+     
+          </div>
+          
+        <div class="list list-inset" ng-show="newAccount" >
+            <form>
+            <label class="item item-input">
+                <span class="input-label">Access Code</span>
+                <input type="text" ng-model="newUser.signupCode">
+              </label>
+              <label class="item item-input">
+                <span class="input-label">Username</span>
+                <input type="text" ng-model="newUser.username">
+              </label>
+              <label class="item item-input">
+                <span class="input-label">Email</span>
+                <input type="email" ng-model="newUser.email" >
+              </label>
+              <label class="item item-input">
+                <span class="input-label">Phone</span>
+                <input type="tel" ng-model="newUser.phone">
+              </label>
+              <label class="item item-input">
+                <span class="input-label">Password</span>
+                <input type="password" ng-model="newUser.password">
+              </label>
+              <button ng-click="signupUser(newUser)" class="button button-positive button-block">Sign Up</button>
+            </form>
+            <button ng-controller="AppCtrl" class="button button-positive button-block" ng-click='shareTextter()'>Share Textter</button>
+            <h4 ng-click="showLogin()" class="center linked">Already have an account? Click here to Login</h4>
+            <p class="center linked" ng-click="gosign()">Don't have an access code? </p>
+        </div>
+      </view>
+      </content>
+    </tab>
+
+  </tabs>
+</nav-page>

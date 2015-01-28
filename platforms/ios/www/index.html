@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <title>textter</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="initial-scale=1, height=device-height, maximum-scale=1, user-scalable=no">
+    
+    <link href="css/ionic.css" rel="stylesheet">
+    <link href="css/ionic.contrib.frostedGlass.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+
+    <script src="js/ionic.bundle.min.js"></script>
+    <script src="js/ionic.contrib.frostedGlass.js"></script>
+    
+    <script src="js/socket.io.min.js"></script>
+    <script src="js/socket.js"></script>
+    <script src="cordova.js"></script>
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/Controllers/FriendsTabCtrl.js"></script>
+    <script src="js/Controllers/LiveCtrl.js"></script>
+    <script src="js/Controllers/API.js"></script>
+    <script src="js/Controllers/RequestCtrl.js"></script>
+<script type="text/javascript">
+      document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+      console.log("Device ready!");
+      
+      window.localStorage.setItem("version", device.version);
+
+      // Incoming message callback
+      var handleIncomingPush = function(event) {
+        if(event.extras.notif == "request") {
+          navigator.notification.confirm(event.message, onConfirm, 'Friend request', ['View', 'Cancel']);
+        } else {
+          console.log("No incoming message");
+        }
+      }
+
+      // Registration callback
+      var onRegistration = function(event)  {
+        if (!event.error) {
+          console.log("Reg Success: " + event.pushID);
+          $('#id').text(event.pushID);
+        } else {
+          console.log(event.error);
+        }
+      }
+      
+      var onConfirm = function(buttonIndex){
+        if(buttonIndex == 1){
+          // open screen with list of all friend requests
+          window.location.href = "#/requests";
+        } else {
+          // do nothing
+        }
+      }
+
+      // Register for any urban airship events
+      document.addEventListener("urbanairship.registration", onRegistration, false);
+      document.addEventListener("urbanairship.push", handleIncomingPush, false);
+
+      // Handle resume
+      document.addEventListener("resume", function() {
+        console.log("Device resume!");
+
+        PushNotification.resetBadge();
+        PushNotification.getIncoming(handleIncomingPush);
+
+        // Reregister for urbanairship events if they were removed in pause event
+        document.addEventListener("urbanairship.registration", onRegistration, false);
+        document.addEventListener("urbanairship.push", handleIncomingPush, false);
+      }, false);
+
+
+      // Handle pause
+      document.addEventListener("pause", function() {
+        console.log("Device pause!");
+
+        // Remove urbanairship events.  Important on android to not receive push in the background.
+        document.removeEventListener("urbanairship.registration", onRegistration, false);
+        document.removeEventListener("urbanairship.push", handleIncomingPush, false);
+      }, false);
+
+      // Register for notification types
+      PushNotification.registerForNotificationTypes(PushNotification.notificationType.badge | 
+        PushNotification.notificationType.sound | 
+        PushNotification.notificationType.alert);
+
+      // Get any incoming push from device ready open
+      PushNotification.getIncoming(handleIncomingPush);
+    }
+
+    </script>
+</head>
+    <body ng-app="textter">
+
+        <ion-nav-bar animation="nav-title-slide-ios7" type="bar-positive" back-button-type="button-icon" back-button-icon="ion-ios7-arrow-left" ></ion-nav-bar>
+    
+        <!-- where the initial view template will be rendered -->
+        <ion-nav-view animation="slide-up-in"></ion-nav-view>
+       
+        <ion-tabs id="main-tabs" animation="false" tabs-style="tabs-icon-top" tabs-type="tabs-positive" ng-hide="isShowTabs">
+            <ion-tab title="Messages" icon-off="icon ion-ios7-chatbubble-outline" icon-on="icon ion-ios7-chatbubble" href="#/messages">
+                <ion-nav-view name="messages-tab"></ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="People" animation="false" icon-on="icon ion-ios7-people" icon-off="icon ion-ios7-people-outline" href="#/people">
+                <ion-nav-view name="people-tab"></ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="Profile" animation="false"  icon-on="icon ion-ios7-gear" icon-off="icon ion-ios7-gear-outline" href="#/profile" >
+                <ion-nav-view name="profile-tab"></ion-nav-view>
+            </ion-tab>
+        </ion-tabs>
+    </body>
+</html>

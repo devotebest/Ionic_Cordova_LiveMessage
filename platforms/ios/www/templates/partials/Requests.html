@@ -1,0 +1,32 @@
+<ion-view title="Requests">
+<style>
+
+	.list{ display: block;}
+	.item{ display: block;}
+	.info{ display: block; float: left;}
+  .controlls{ display: block; float: right;}
+	.left{ float: left; margin-right: 58px;}
+	.right{ float: right; margin-left: 58px;}
+	
+</style>
+    <ion-content has-header="true" padding="false">
+        <div class="list">
+					<div ng-repeat="person in people" class="item item-avatar item-button-right" ng-hide="inFriends">
+						
+							<img src="https://d2lrssvd8no86h.cloudfront.net/{{person.id}}.jpg">
+							<h2>{{person.name}}</h2>
+						
+							<a class="left button button-balanced icon ion-ios7-plus-empty" ng-click="acceptRequest(person.id); inFriends = true">
+							</a>
+							<a class="right button button-assertive icon ion-ios7-close-empty" ng-click="declineRequest(person.id); inFriends = true">
+							</a>
+						
+					</div>
+          <!-- <div ng-repeat="person in people" class="item item-avatar item-icon-right" ng-click="friendRequest('{{person._id}}'); inFriends = true" ng-hide="inFriends">
+            <img src="https://d2lrssvd8no86h.cloudfront.net/{{person._id}}.jpg">
+            <h2>{{person.name}}</h2>
+            <i class="icon ion-ios7-plus-outline"></i>
+          </div>-->
+        </div> 
+    </ion-content>
+</ion-view>

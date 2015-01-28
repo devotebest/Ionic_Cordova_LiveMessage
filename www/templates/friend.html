@@ -1,0 +1,39 @@
+<ion-view title="{{title}}">
+    <ion-content has-header="true" has-footer="true"  has-tabs="false" padding="true" start-y="120" on-refresh="refreshChat(skip,take)">
+        <style>
+            .tabs{
+                display: none!important;
+            }
+        </style>
+
+        <ol class="messages" >
+            <li ng-show="item.msg != ''" class="animated rubberBand" id="{{item.date}}" ng-repeat="item in hist" ng-class='getClass(item.from)' >
+                <p>{{item.msg}}</p>
+            </li>
+        </ol>
+        <ol class="messages">
+            <li ng-show="liveIn != ''"  class="to animated bounceInRight">
+                <p>{{liveIn}}&nbsp;<i class="icon ion-loading-c"></i></p>
+            </li>
+        </ol>
+          <!-- for pull to refresh -->
+    <ion-refresher></ion-refresher>
+    </ion-content>
+     <footer class="bar bar-footer noPad">
+     <form class="wide">
+       <div class="item item-input-inset chatWrap" >
+     
+        <div class="item-input-wrapper greyBack">
+          <!--<input  name="input" ng-trim="true" ng-change="liveChat()" ng-focus="focusBottom()" ng-blur="goToBottom()" type="text" ng-model="chatInput"></input>-->
+          <textarea rows="1" name="input" id="liveChatInput" ng-trim="true" ng-change="liveChat()" ng-focus="focusBottom()" ng-blur="doBlur()" type="text" ng-model="chatInput"></textarea>
+          <i id="clearChat" class="icon ion-ios7-close-empty placeholder-icon" ng-click="clearChat()"></i>
+        </div>
+          
+        <button type="button" id="send" class="button button-small button-clear" ng-click="sendChat()">Send</button>
+
+      </div>
+     </form>
+  
+      </footer>
+
+</ion-view>

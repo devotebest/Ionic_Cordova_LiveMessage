@@ -1,0 +1,26 @@
+<ion-view title="Find Friends">
+<style>
+  .scroll{margin-top: 60px;}
+  #searchField{width: 90%;}
+</style>
+    <ion-content has-header="true" padding="false">
+        <div class="bar bar-header item-input-inset tallerBar">
+            <label class="item-input-wrapper">
+                <i class="icon ion-ios7-search placeholder-icon"></i>
+                <input id="searchField" type="search" class="whiteBg" ng-focus="hideTabs()" ng-blur="showTabs()" ng-model="filterUsers">
+            </label>
+            <button id="search" class="button button-clear" ng-click="searchUsers(filterUsers)">
+                Search
+            </button>
+        </div>
+        <div class="list">
+          <a ng-repeat="person in people track by $index" class="item item-avatar item-icon-right" ng-click="addNew('{{person._id}}'); inFriends = true" ng-hide="inFriends">
+            <img src="https://d2lrssvd8no86h.cloudfront.net/{{person._id}}.jpg">
+            <h2>{{person.username}}</h2>
+            <!--<p class="inList">{{person.myStatus}}</p> -->
+            <i class="icon ion-ios7-plus-outline"></i>
+          </a>
+        </div>
+        <ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+    </ion-content>
+  </ion-view>

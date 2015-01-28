@@ -1,0 +1,94 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "framework": {
+            "ImageIO.framework": {
+                "true": 1
+            },
+            "CoreLocation.framework": {
+                "false": 1
+            },
+            "CoreGraphics.framework": {
+                "false": 1,
+                "true": 1
+            },
+            "AssetsLibrary.framework": {
+                "false": 1
+            },
+            "MobileCoreServices.framework": {
+                "false": 1,
+                "true": 1
+            },
+            "libsqlite3.dylib": {
+                "false": 1
+            },
+            "libz.dylib": {
+                "false": 1
+            },
+            "CFNetwork.framework": {
+                "true": 1
+            },
+            "Foundation.framework": {
+                "true": 1
+            },
+            "Security.framework": {
+                "true": 1
+            },
+            "SystemConfiguration.framework": {
+                "true": 1
+            },
+            "UIKit.framework": {
+                "true": 1
+            },
+            "CoreTelephony.framework": {
+                "true": 1
+            },
+            "Social.framework": {
+                "false": 1
+            },
+            "AudioToolbox.framework": {
+                "true": 2
+            }
+        },
+        "config.xml": {
+            "/*": {
+                "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>": 1,
+                "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>": 1,
+                "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>": 1,
+                "<feature name=\"SocialMessage\"><param name=\"ios-package\" value=\"SocialMessage\" /></feature>": 1,
+                "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>": 1,
+                "<feature name=\"Vibration\"><param name=\"ios-package\" value=\"CDVVibration\" /></feature>": 1
+            },
+            "/widget": {
+                "<feature name=\"PushNotificationPlugin\"><param name=\"ios-package\" value=\"PushNotificationPlugin\" /><param name=\"onload\" value=\"true\" /></feature>": 1
+            }
+        }
+    },
+    "installed_plugins": {
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "com.textter.app"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.textter.app"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "com.textter.app"
+        },
+        "com.urbanairship.phonegap.PushNotification": {
+            "PACKAGE_NAME": "com.textter.app"
+        },
+        "uk.co.ilee.socialmessage": {
+            "PACKAGE_NAME": "com.textter.app"
+        },
+        "org.apache.cordova.dialogs": {
+            "PACKAGE_NAME": "com.textter.app"
+        },
+        "org.apache.cordova.vibration": {
+            "PACKAGE_NAME": "com.textter.app"
+        }
+    },
+    "dependent_plugins": {}
+}
